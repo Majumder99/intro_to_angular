@@ -1,0 +1,8 @@
+boostrapApplicaiton bootstraps an instance of an angular application and renders a standalone component as the
+application's root component.
+
+In angular, routing allows us to load specific components or modules when accessing routes like:
+/home or /dashboard/menu
+
+
+ng generate component <component-name> creates a new component in the current directory.

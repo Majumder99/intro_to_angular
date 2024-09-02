@@ -6,3 +6,12 @@ In angular, routing allows us to load specific components or modules when access
 
 
 ng generate component <component-name> creates a new component in the current directory.
+
+
+A constructor is used to inject depenedencies, such as services, before the component is initialized.
+Additionally, it can be used for initialization logic like initializeing properties, but it is generally
+recommended to move all initialization logic to lifecycle hooks like ngOnInit.
+
+
+For every api call there is service. One service for all the api call get, delete, put and post
+Now for each database collection there is each service. 

@@ -1,25 +1,89 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Products } from '../../types';
+import { PaginatorModule } from 'primeng/paginator';
+import { Product, Products } from '../../types';
+import { ProductComponent } from '../components/product/product.component';
 import { ProductsService } from '../services/products.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [ProductComponent, CommonModule, PaginatorModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
   constructor(private productService: ProductsService) {}
 
-  ngOnInit() {
+  products: Product[] = [];
+  rows: number = 5;
+  totalRecords: number = 0;
+  onProductOutput(product: Product) {
+    console.log('output', product);
+  }
+  onPageChange(event: any) {
+    this.fetchProducts(event.page, event.rows);
+  }
+  fetchProducts(page: number, perPage: number) {
     this.productService
       .getProducts('http://localhost:3000/clothes', {
-        page: 0,
-        perPage: 5,
+        page,
+        perPage,
       })
-      .subscribe((products: Products) => {
-        console.log(products);
+      .subscribe({
+        next: (response: Products) => {
+          this.products = response.items;
+          this.totalRecords = response.total;
+        },
+        error: (error) => {
+          console.error(error);
+        },
       });
+  }
+
+  editProduct(product: Product, id: number) {
+    this.productService
+      .editProduct(`http://localhost:3000/clothes/${id}`, product)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.fetchProducts(0, this.rows);
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
+  }
+
+  deleteProduct(id: number) {
+    this.productService
+      .deleteProduct(`http://localhost:3000/clothes/${id}`)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.fetchProducts(0, this.rows);
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
+  }
+
+  addProduct(product: Product) {
+    this.productService
+      .addProduct('http://localhost:3000/clothes', product)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.fetchProducts(0, this.rows);
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
+  }
+
+  ngOnInit() {
+    this.fetchProducts(0, this.rows);
   }
 }

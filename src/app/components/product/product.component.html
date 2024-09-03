@@ -1,0 +1,9 @@
+<p>{{ product.name }}</p>
+<div>
+  <img [src]="product.image" alt="" />
+  <p-rating
+    [(ngModel)]="product.rating"
+    [readonly]="true"
+    iconCancelClass="hidden"
+  />
+</div>

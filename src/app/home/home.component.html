@@ -1,1 +1,15 @@
-<p>home works!</p>
+<div>
+  <app-product
+    *ngFor="let product of products"
+    [product]="product"
+    (productOutput)="onProductOutput($event)"
+  ></app-product>
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [rows]="rows"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[5, 10, 20]"
+  />
+</div>
+
+<!-- <p>home works!</p> -->

@@ -14,4 +14,13 @@ recommended to move all initialization logic to lifecycle hooks like ngOnInit.
 
 
 For every api call there is service. One service for all the api call get, delete, put and post
-Now for each database collection there is each service. 
+Now for each database collection there is each service.
+
+
+output edit dichi oi ouput e ekta eventemitter dichi.. ekhn oi button e click korle ekta event jabe
+and oi event catch korar jnno amra oi component jekhane declare korchi oikhane edit nam dibo (edit) = amr function($event)
+
+
+decorator, two way & one way binding, id routing , modules routing, pipes,reactactiveformmodule,
+state management, rxjs, forms handling with validation, hydration, lazy loading, lazy routing,
+localstoreage, data fetching httpclient and others alternatives
